@@ -1,7 +1,9 @@
-function GameManager(size, InputManager, Actuator) {
+function GameManager(size, InputManager, Actuator, animationDelay, aiConfig) {
   this.size         = size; // Size of the grid
   this.inputManager = new InputManager;
   this.actuator     = new Actuator;
+  this.animationDelay = animationDelay || 350; // Default animation delay
+  this.aiConfig     = aiConfig; // AI configuration
 
   this.running      = false;
 
@@ -41,7 +43,7 @@ GameManager.prototype.setup = function () {
   this.grid         = new Grid(this.size);
   this.grid.addStartTiles();
 
-  this.ai           = new AI(this.grid);
+  this.ai           = new AI(this.grid, this.aiConfig);
 
   this.score        = 0;
   this.over         = false;
@@ -85,13 +87,49 @@ GameManager.prototype.move = function(direction) {
 
 // moves continuously until game is over
 GameManager.prototype.run = function() {
-  var best = this.ai.getBest();
-  this.move(best.move);
-  var timeout = animationDelay;
+  var self = this;
+  
+  // Use the move queue to prevent simultaneous AI computations
+  if (typeof queueMove !== 'undefined') {
+    queueMove(this, function(done) {
+      var best = self.ai.getBest();
+      self.move(best.move);
+      done(); // Signal that AI computation is complete
+    });
+  } else {
+    // Fallback if queue system isn't available
+    var best = this.ai.getBest();
+    this.move(best.move);
+  }
+  
+  var timeout = this.animationDelay;
+  
   if (this.running && !this.over && !this.won) {
-    var self = this;
+    // Continue playing
     setTimeout(function(){
       self.run();
     }, timeout);
+  } else if (this.running && (this.over || this.won)) {
+    // Game ended, handle restart
+    if (this.over) {
+      // Game lost - restart immediately
+      setTimeout(function(){
+        self.restart();
+        self.running = true;
+        self.actuator.setRunButton('Stop');
+        self.run();
+      }, timeout);
+    } else if (this.won) {
+      // Game won - increment win counter and wait 3 seconds then restart
+      if (self.actuator.incrementWins) {
+        self.actuator.incrementWins();
+      }
+      setTimeout(function(){
+        self.restart();
+        self.running = true;
+        self.actuator.setRunButton('Stop');
+        self.run();
+      }, 3000);
+    }
   }
 }

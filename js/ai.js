@@ -1,21 +1,24 @@
-function AI(grid) {
+function AI(grid, config) {
   this.grid = grid;
+  this.config = config || {
+    minSearchTime: 100,
+    smoothWeight: 0.1,
+    mono2Weight: 1.0,
+    emptyWeight: 2.7,
+    maxWeight: 1.0
+  };
 }
 
 // static evaluation function
 AI.prototype.eval = function() {
   var emptyCells = this.grid.availableCells().length;
 
-  var smoothWeight = 0.1,
-      //monoWeight   = 0.0,
-      //islandWeight = 0.0,
-      mono2Weight  = 1.0,
-      emptyWeight  = 2.7,
-      maxWeight    = 1.0;
+  var smoothWeight = this.config.smoothWeight,
+      mono2Weight  = this.config.mono2Weight,
+      emptyWeight  = this.config.emptyWeight,
+      maxWeight    = this.config.maxWeight;
 
   return this.grid.smoothness() * smoothWeight
-       //+ this.grid.monotonicity() * monoWeight
-       //- this.grid.islands() * islandWeight
        + this.grid.monotonicity2() * mono2Weight
        + Math.log(emptyCells) * emptyWeight
        + this.grid.maxValue() * maxWeight;
@@ -136,7 +139,7 @@ AI.prototype.iterativeDeep = function() {
       best = newBest;
     }
     depth++;
-  } while ( (new Date()).getTime() - start < minSearchTime);
+  } while ( (new Date()).getTime() - start < this.config.minSearchTime);
   return best
 }
 

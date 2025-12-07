@@ -6,6 +6,7 @@
 
   <link href="style/main.css" rel="stylesheet" type="text/css">
   <link href="style/ai.css" rel="stylesheet" type="text/css">
+  <link href="style/dual-game.css" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="favicon.ico">
 
   <meta name="HandheldFriendly" content="True">
@@ -18,63 +19,152 @@
   <meta property="og:image" content="http://gabrielecirulli.github.io/2048/meta/og_image.png"/>
 </head>
 <body>
-  <div class="container">
-    <div class="heading">
-      <h1 class="title">2048</h1>
-      <div class="score-container">0</div>
+  <div class="dual-game-container">
+    
+    <!-- Running Timer -->
+    <div class="game-timer">
+      <div class="timer-label">GAME TIME</div>
+      <div class="timer-display">00:00</div>
     </div>
-    <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
+    
+    <div class="games-wrapper">
+      <!-- Game 1 (Left) -->
+      <div class="container game-1">
+        <!-- Win Counter Scoreboard -->
+        <div class="scoreboard">
+          <div class="player-name">Red Team</div>
+          <div class="win-counter">
+            <div class="wins-label">2048 WINS</div>
+            <div class="wins-count">0</div>
+          </div>
+        </div>
 
-    <div class="controls">
-      <div id="hint-button-container">
-        <button id="hint-button" class="ai-button">Get Hint</button>
+        <div class="controls">
+          <div class="hint-button-container">
+            <button class="hint-button ai-button">Get Hint</button>
+          </div>
+          <div class="feedback-container"> </div>
+          <div class="run-button-container">
+            <button class="run-button ai-button">Auto-run</button>
+          </div>
+        </div>
+
+        <div class="game-container">
+          <div class="game-message">
+            <p></p>
+            <div class="lower">
+              <a class="retry-button">Try again</a>
+              <div class="score-sharing"></div>
+            </div>
+          </div>
+
+          <div class="grid-container">
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+          </div>
+
+          <div class="tile-container">
+          </div>
+        </div>
+
+        <!-- Current Game Score (moved below grid) -->
+        <div class="current-score">
+          <div class="score-label">CURRENT SCORE</div>
+          <div class="score-container">0</div>
+        </div>
       </div>
-      <div id="feedback-container"> </div>
-      <div id="run-button-container">
-        <button id="run-button" class="ai-button">Auto-run</button>
+
+      <!-- Game 2 (Right) -->
+      <div class="container game-2">
+        <!-- Win Counter Scoreboard -->
+        <div class="scoreboard">
+          <div class="player-name">Blue Team</div>
+          <div class="win-counter">
+            <div class="wins-label">2048 WINS</div>
+            <div class="wins-count">0</div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="hint-button-container">
+            <button class="hint-button ai-button">Get Hint</button>
+          </div>
+          <div class="feedback-container"> </div>
+          <div class="run-button-container">
+            <button class="run-button ai-button">Auto-run</button>
+          </div>
+        </div>
+
+        <div class="game-container">
+          <div class="game-message">
+            <p></p>
+            <div class="lower">
+              <a class="retry-button">Try again</a>
+              <div class="score-sharing"></div>
+            </div>
+          </div>
+
+          <div class="grid-container">
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+              <div class="grid-cell"></div>
+            </div>
+          </div>
+
+          <div class="tile-container">
+          </div>
+        </div>
+
+        <!-- Current Game Score (moved below grid) -->
+        <div class="current-score">
+          <div class="score-label">CURRENT SCORE</div>
+          <div class="score-container">0</div>
+        </div>
       </div>
     </div>
-
-    <div class="game-container">
-      <div class="game-message">
-        <p></p>
-        <div class="lower">
-          <a class="retry-button">Try again</a>
-          <div class="score-sharing"></div>
-        </div>
-      </div>
-
-      <div class="grid-container">
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
-      </div>
-
-      <div class="tile-container">
-
-      </div>
-    </div>]
+  </div>
 
   <script src="js/animframe_polyfill.js"></script>
   <script src="js/hammer.min.js"></script>
@@ -87,13 +177,17 @@
   <script src="js/application.js"></script>
 
   <script>
-    (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,"script","//www.google-analytics.com/analytics.js","ga");
-
-    ga("create", "UA-42620757-2", "gabrielecirulli.github.io");
-    ga("send", "pageview");
+    // Auto-start both AIs after the games are fully loaded
+    window.addEventListener('load', function() {
+      // Small delay to ensure all initialization is complete
+      setTimeout(function() {
+        // Start both games
+        var runButtons = document.querySelectorAll('.run-button');
+        runButtons.forEach(function(button) {
+          button.click();
+        });
+      }, 100);
+    });
   </script>
 </body>
 </html>

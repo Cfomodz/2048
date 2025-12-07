@@ -1,0 +1,194 @@
+/* Dual Game Layout Styles */
+
+.dual-game-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Game Timer Styles */
+.game-timer {
+  text-align: center;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #34495e, #2c3e50);
+  border: 3px solid #ecf0f1;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  max-width: 300px;
+  margin: 0 auto 30px auto;
+}
+
+.timer-label {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ecf0f1;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.timer-display {
+  font-size: 48px;
+  font-weight: bold;
+  color: #27ae60;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  font-family: 'Courier New', monospace;
+}
+
+.main-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.main-heading .title {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  color: #776e65;
+}
+
+.main-heading .game-intro {
+  font-size: 18px;
+  color: #776e65;
+  margin: 0;
+}
+
+.games-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.container.game-1,
+.container.game-2 {
+  flex: 1;
+  max-width: 500px;
+  margin: 0;
+}
+
+/* Scoreboard Styles (Basketball-style) */
+.scoreboard {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  border: 3px solid #ecf0f1;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.player-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ecf0f1;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.game-1 .player-name {
+  color: #e74c3c;
+}
+
+.game-2 .player-name {
+  color: #3498db;
+}
+
+.win-counter {
+  background: #1a1a1a;
+  border: 2px solid #ecf0f1;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wins-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ecf0f1;
+  letter-spacing: 1px;
+}
+
+.wins-count {
+  font-size: 36px;
+  font-weight: bold;
+  color: #f39c12;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  min-width: 60px;
+}
+
+/* Current Score Styles (moved below grid, larger) */
+.current-score {
+  text-align: center;
+  margin-top: 20px;
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.score-label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.current-score .score-container {
+  font-size: 48px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  margin: 0;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  position: relative;
+  margin-top: -40px; /* Move score up by 40px */
+}
+
+/* Remove the "Score" text that appears behind the numbers */
+.current-score .score-container:after {
+  display: none;
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 1000px) {
+  .games-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .container.game-1,
+  .container.game-2 {
+    max-width: 500px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .dual-game-container {
+    padding: 10px;
+  }
+  
+  .main-heading .title {
+    font-size: 36px;
+  }
+  
+  .main-heading .game-intro {
+    font-size: 16px;
+  }
+  
+  .games-wrapper {
+    gap: 20px;
+  }
+  
+  .container.game-1 .title,
+  .container.game-2 .title {
+    font-size: 24px;
+  }
+}
